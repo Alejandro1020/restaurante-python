@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/styles/styleHome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+    <header>
+        {% include './shared/menu.html' %}
+    </header>
+
+    <br><br><br>
+
+
+    {% if bandera%}
+        <script>Swal.fire(
+            'Plato guardado con exito',
+            'You clicked the button!',
+            'success'
+          )</script>
+    {% endif%}
+
+    <main>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-12 col-md-5">
+                    <img src="../static/img/bowl.jfif" alt="">
+                </div>
+                <div class="col-12 col-md-7">
+                    <h2>Registro de platos</h2>
+                    <form method="POST">
+                        {{formulario}}
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary btn-outline-succes w-100">Enviar</button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+        
+    </main>
+    <br><br><br>
+    <section>
+        <div class="container">
+            <div class="row row-cols row-cools-md-4 g-3">
+                {% for  plato in platos %}
+                <div class="col col-12 col-md-3 card  ">
+                    <h1>{{plato.nombre}}</h1>
+                    <h4>{{plato.precio}}</h4>
+                    
+                    <img src={{plato.fotografia}} alt="">
+                </div>
+                
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        {% include './shared/footer.html' %}
+    </footer>
+    
+</body>
+</html>
